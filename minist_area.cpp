@@ -16,7 +16,6 @@ int mini(int width, int height){
     int ma = max_block;
     while (ma>min_block)
     {
-        /* code */
         ma -= min_block;
     }
     return mini(ma,min_block);
