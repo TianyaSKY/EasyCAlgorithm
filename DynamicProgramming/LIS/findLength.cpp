@@ -5,15 +5,24 @@
 #include <iostream>
 #include <chrono>
 using namespace std;
-class Solution{
+class Solution {
     public:
-        
-    private:
-};
+        int findLength(const vector<int>& nums1,const vector<int>& nums2) {
+            vector<vector<int>> dp(nums1.size()+1,vector<int>(nums2.size()+1,0));  // n1以i-1结尾 n2以j-1结尾 
+            int result = 0;
+            for (int i = 1;i<=nums1.size();i++){
+                for (int j = 1;j<=nums2.size();j++){
+                    if (nums1[i-1]==nums2[j-1]) dp[i][j] = dp[i-1][j-1] +1;
+                    result = max(result,dp[i][j]);
+                }
+            }
+            return result;
+        }
+    };
 
 void algor(){
     Solution s;
-    auto result = s;
+    auto result = s.findLength({1,2,3,2,1},{3,2,1,4,7});
     // cout<<result<<endl;
 };
 

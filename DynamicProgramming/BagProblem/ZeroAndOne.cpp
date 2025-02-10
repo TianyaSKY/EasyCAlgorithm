@@ -5,16 +5,30 @@
 #include <iostream>
 #include <chrono>
 using namespace std;
-class Solution{
+class Solution {
     public:
-        
-    private:
+        int findMaxForm(vector<string>& strs, int m, int n) {
+            vector<vector<int>> dp(m+1,vector<int>(n+1,0));
+            
+            for (string str:strs){
+                int ZeroNum = 0,OneNum = 0;
+                for (char c:str){
+                    if (c=='0') ZeroNum++;
+                    else OneNum++;
+                }
+                for (int i = m;i>=ZeroNum;i--){
+                    for (int j = n;j>=OneNum;j--){
+                        dp[i][j] = max(dp[i][j],dp[i-ZeroNum][j-OneNum]+1);
+                    }
+                }
+            }
+        return dp[m][n];
+        }
 };
 
 void algor(){
     Solution s;
-    auto result = s;
-    // cout<<result<<endl;
+    
 };
 
 int main(int argc, char const *argv[])

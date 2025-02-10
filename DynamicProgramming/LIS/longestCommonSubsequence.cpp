@@ -5,15 +5,27 @@
 #include <iostream>
 #include <chrono>
 using namespace std;
-class Solution{
+class Solution {
     public:
-        
-    private:
-};
+        int longestCommonSubsequence(string text1, string text2) {
+            vector<vector<int>> dp(text1.length()+1,vector<int>(text2.length()+1,0));
+            int result = 0;
+            for (int i = 1;i<=text1.length();i++){
+                for (int j = 1;j<=text2.length();j++){
+                    if (text1.substr(i-1,1)==text2.substr(j-1,1)) dp[i][j] = dp[i-1][j-1] + 1;
+                    else {
+                        dp[i][j] = max(dp[i-1][j],dp[i][j-1]);
+                    }
+                    result = max(result,dp[i][j]);
+                }
+            }
+            return result;
+        }
+    };
 
 void algor(){
     Solution s;
-    auto result = s;
+    auto result = s.longestCommonSubsequence("abc","def");
     // cout<<result<<endl;
 };
 

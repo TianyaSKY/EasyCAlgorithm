@@ -5,16 +5,25 @@
 #include <iostream>
 #include <chrono>
 using namespace std;
-class Solution{
+class Solution {
     public:
-        
-    private:
+        int coinChange(const vector<int>& coins, int amount) {
+            vector<int> dp(amount+1,30000);
+            dp[0] = 0;
+            for (int i  =0;i<coins.size();i++){
+                for (int j = coins[i];j<=amount;j++){
+                    dp[j] = min(dp[j-coins[i]] +1,dp[j]);
+                }
+            }
+            if (dp[amount] == 30000) return -1;
+            return dp[amount];
+        }
 };
 
 void algor(){
     Solution s;
-    auto result = s;
-    // cout<<result<<endl;
+    auto result = s.coinChange({1,2,5},11);
+    cout<<result<<endl;
 };
 
 int main(int argc, char const *argv[])

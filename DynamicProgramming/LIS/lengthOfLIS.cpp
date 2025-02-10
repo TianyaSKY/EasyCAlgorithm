@@ -5,11 +5,21 @@
 #include <iostream>
 #include <chrono>
 using namespace std;
-class Solution{
+class Solution {
     public:
-        
-    private:
-};
+        int lengthOfLIS(vector<int>& nums) {
+            int result = 0;
+            vector<int> dp(nums.size(),1);
+            for (int i = 1;i<=nums.size();i++){
+                for (int j = 0;j<i;j++){
+                    if (nums[i] > nums[j])
+                        dp[i] = max(dp[i],dp[j]+1);
+                }
+                if (dp[i] > result) result = dp[i];
+            }
+            return result;
+        }
+    };
 
 void algor(){
     Solution s;

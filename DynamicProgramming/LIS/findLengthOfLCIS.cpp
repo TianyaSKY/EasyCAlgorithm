@@ -5,11 +5,19 @@
 #include <iostream>
 #include <chrono>
 using namespace std;
-class Solution{
+class Solution {
     public:
-        
-    private:
-};
+        int findLengthOfLCIS(vector<int>& nums) {
+            if (nums.size()==1) return 1;
+            int result = 0;
+            vector<int> dp(nums.size(),1);
+            for (int i =1;i<nums.size();i++){
+                if (nums[i]>nums[i-1]) dp[i] = dp[i-1] + 1;
+                result = max(result,dp[i]);
+            }
+            return result;
+        }
+    };
 
 void algor(){
     Solution s;

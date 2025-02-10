@@ -5,16 +5,26 @@
 #include <iostream>
 #include <chrono>
 using namespace std;
-class Solution{
-    public:
-        
-    private:
+class Solution {
+public:
+    int integerBreak(int n) {
+        vector<int> dp({0,1});
+        for (int i =2;i<=n;i++){
+            int maxval = 0;
+            for (int j = 1;j<i;j++)
+            if (i-j<dp[i-j])
+                maxval = max(maxval,j*dp[i-j]);
+            else
+                maxval = max(maxval,j*(i-j));
+            dp.push_back(maxval);
+        }
+        return dp[n];
+    }
 };
-
 void algor(){
     Solution s;
-    auto result = s;
-    // cout<<result<<endl;
+    cout<<s.integerBreak(10)<<endl;
+    
 };
 
 int main(int argc, char const *argv[])
