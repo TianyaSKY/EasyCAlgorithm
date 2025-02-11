@@ -6,7 +6,8 @@
 #include <chrono>
 using namespace std;
 class Solution {
-    public:
+    public:    
+        // 最长公共子序列
         int longestCommonSubsequence(string text1, string text2) {
             vector<vector<int>> dp(text1.length()+1,vector<int>(text2.length()+1,0));
             int result = 0;

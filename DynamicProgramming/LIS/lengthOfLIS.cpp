@@ -7,6 +7,7 @@
 using namespace std;
 class Solution {
     public:
+        // 最长递增子序列
         int lengthOfLIS(vector<int>& nums) {
             int result = 0;
             vector<int> dp(nums.size(),1);

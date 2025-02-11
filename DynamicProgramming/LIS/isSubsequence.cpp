@@ -7,16 +7,19 @@
 using namespace std;
 class Solution {
     public:
-        // 最长递增子序列
-        int findLengthOfLCIS(vector<int>& nums) {
-            if (nums.size()==1) return 1;
-            int result = 0;
-            vector<int> dp(nums.size(),1);
-            for (int i =1;i<nums.size();i++){
-                if (nums[i]>nums[i-1]) dp[i] = dp[i-1] + 1;
-                result = max(result,dp[i]);
+        // 判断s是否为t的子序列
+        bool isSubsequence(string s, string t) {
+            vector<vector<int>> dp(s.length()+1,vector<int>(t.length()+1,0));
+            for (int i = 1;i<=s.length();i++){
+                for (int j = 1;j<=t.length();j++){
+                    if (s.substr(i-1,1)==t.substr(j-1,1)) dp[i][j] = dp[i-1][j-1] + 1;
+                    else {
+                        dp[i][j] = max(dp[i-1][j],dp[i][j-1]);
+                    }
+                    if (dp[i][j] == s.length()) return true;
+                }
             }
-            return result;
+            return false;
         }
     };
 

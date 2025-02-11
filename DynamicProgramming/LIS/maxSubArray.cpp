@@ -7,13 +7,14 @@
 using namespace std;
 class Solution {
     public:
-        // 最长递增子序列
-        int findLengthOfLCIS(vector<int>& nums) {
-            if (nums.size()==1) return 1;
-            int result = 0;
-            vector<int> dp(nums.size(),1);
-            for (int i =1;i<nums.size();i++){
-                if (nums[i]>nums[i-1]) dp[i] = dp[i-1] + 1;
+        // 最大数组和
+        int maxSubArray(vector<int>& nums) {
+            if (nums.size()<=1) return nums[0];
+            vector<int> dp(nums.size(),0); // 以i结尾的最大子序列和
+            dp[0] = nums[0];
+            int result = nums[0];
+            for (int i = 1;i<nums.size();i++){
+                dp[i] = max(dp[i-1]+nums[i],nums[i]);
                 result = max(result,dp[i]);
             }
             return result;

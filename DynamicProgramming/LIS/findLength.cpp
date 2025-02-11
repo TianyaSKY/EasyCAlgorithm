@@ -7,6 +7,7 @@
 using namespace std;
 class Solution {
     public:
+        // 最长公共子数组
         int findLength(const vector<int>& nums1,const vector<int>& nums2) {
             vector<vector<int>> dp(nums1.size()+1,vector<int>(nums2.size()+1,0));  // n1以i-1结尾 n2以j-1结尾 
             int result = 0;

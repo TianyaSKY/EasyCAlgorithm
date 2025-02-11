@@ -7,22 +7,26 @@
 using namespace std;
 class Solution {
     public:
-        // 最长递增子序列
-        int findLengthOfLCIS(vector<int>& nums) {
-            if (nums.size()==1) return 1;
-            int result = 0;
-            vector<int> dp(nums.size(),1);
-            for (int i =1;i<nums.size();i++){
-                if (nums[i]>nums[i-1]) dp[i] = dp[i-1] + 1;
-                result = max(result,dp[i]);
+        // 不同的子序列 判断s中出现t的个数
+        int numDistinct(string s, string t) {
+            vector<vector<int>> dp(s.length()+1,vector<int>(t.length()+1,0));
+            for (int i = 0;i<=s.length();i++)
+                dp[i][0] = 1;
+            for (int i = 1;i<=s.length();i++){
+                for (int j = 1;j<=t.length();j++){
+                    if (s.substr(i-1,1)==t.substr(j-1,1))  dp[i][j] = (dp[i-1][j-1] + dp[i-1][j]) % (int)(1e9+7);
+                    else {
+                        dp[i][j] = dp[i-1][j];
+                    }                        
+                }
             }
-            return result;
-        }
-    };
+            return dp[s.length()][t.length()];
+    }
+};
 
 void algor(){
     Solution s;
-    auto result = s;
+    auto result = s.numDistinct("baegg","bag");
     // cout<<result<<endl;
 };
 
